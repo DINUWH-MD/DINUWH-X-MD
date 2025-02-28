@@ -102,6 +102,7 @@
     "prompt-sync": "^4.2.0",
     "adm-zip": "^0.5.16",
     "ytsearch-venom":"^1.0.0",
+    "@dark-yasiya/yt-dl.js": "1.0.5",
     "@vreden/youtube_scraper": "1.2.5"
   }
 }
