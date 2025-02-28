@@ -56,7 +56,7 @@ cmd(
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
               newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
-              newsletterJid: "120363296605464049@newsletter",
+              newsletterJid: "120363368552902204@newsletter",
             },
             externalAdReply: {
               title: "𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 𝚃𝙴𝙲𝙷 𝙲𝙷𝙰𝙽𝙽𝙴𝙻",
