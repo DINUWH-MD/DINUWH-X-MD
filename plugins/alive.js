@@ -50,7 +50,17 @@ cmd(
 ╰─━━━━━━❰ *ᴛʜᴀɴᴋ ʏᴏᴜ!* ❱━━━━━━─╯  
          ⛦ *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅɪɴᴜᴡʜ ᴍᴅ* ⛦`;
 
-      // Send the alive message
+      // Send the image first
+      await robin.sendMessage(
+        from,
+        {
+          image: { url: "https://i.ibb.co/CsQd4sTP/8060.jpg" },
+          caption: aliveText,
+        },
+        { quoted: m }
+      );
+
+      // Send the forward effect after the image
       await robin.sendMessage(
         from,
         {
@@ -59,9 +69,9 @@ cmd(
             forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
-                newsletterJid: "120363296605464049@newsletter",
-            }
+              newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
+              newsletterJid: "120363368552902204@newsletter",
+            },
           },
         },
         { quoted: m }
