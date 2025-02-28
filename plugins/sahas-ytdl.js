@@ -36,8 +36,23 @@ cmd({
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯
 > *© POWERED BY DINUWH MD*`;
 
-        await conn.sendMessage(from, { image: { url: data.result.thumbnail || '' }, caption: ytmsg }, { quoted: mek });
-        await conn.sendMessage(from, { video: { url: data.result.download_url }, mimetype: "video/mp4" }, { quoted: mek });
+        await conn.sendMessage(from, { 
+            image: { url: data.result.thumbnail || '' }, 
+            caption: ytmsg,
+            contextInfo: {
+                forwardingScore: 999,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
+                    newsletterJid: "120363368552902204@newsletter",
+                }
+            }
+        }, { quoted: mek });
+
+        await conn.sendMessage(from, { 
+            video: { url: data.result.download_url }, 
+            mimetype: "video/mp4" 
+        }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
@@ -45,7 +60,7 @@ cmd({
     }
 });  
 
-// Song Download Command (PTT, Document & Normal Audio)
+// Song Download Command
 cmd({ 
     pattern: "2song", 
     alias: ["2ytmp3", "play", "2mp3"], 
@@ -80,7 +95,18 @@ cmd({
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯
 > *© POWERED BY DINUWH MD*`;
 
-        await conn.sendMessage(from, { image: { url: data.result.image || '' }, caption: ytmsg }, { quoted: mek });
+        await conn.sendMessage(from, { 
+            image: { url: data.result.image || '' }, 
+            caption: ytmsg,
+            contextInfo: {
+                forwardingScore: 999,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
+                    newsletterJid: "120363368552902204@newsletter",
+                }
+            }
+        }, { quoted: mek });
 
         // Send as Normal Audio
         await conn.sendMessage(from, { 
