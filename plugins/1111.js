@@ -10,13 +10,13 @@ const { ytsearch, ytmp3, ytmp4 } = require('@dark-yasiya/yt-dl.js');
 // video
 
 cmd({ 
-    pattern: "video", 
+    pattern: "video2", 
     alias: ["mp4", "song"], 
     react: "🎥", 
     desc: "Download Youtube song", 
     category: "download", 
     use: '.song < Yt url or Name >', 
-    filename: __filename 
+    filename: "𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳", 
 }, async (conn, mek, m, { from, prefix, quoted, q, reply }) => { 
     try { 
         if (!q) return await reply("Please provide a YouTube URL or song name.");
@@ -34,109 +34,127 @@ cmd({
             return reply("Failed to fetch the video. Please try again later.");
         }
         
-        let ytmsg = `╭━━━〔 *SAHAS-MD* 〕━━━┈⊷
+        let ytmsg = `╭━━━〔 *𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳* 〕━━━┈⊷
 ┃▸╭───────────
-┃▸┃๏ *VIDEO DOWNLOADER*
-┃▸└───────────···๏
+┃▸┃🎬 *VIDEO DOWNLOADER*
+┃▸└───────────···🎶
 ╰────────────────┈⊷
 ╭━━❐━⪼
-┇๏ *Title* -  ${yts.title}
-┇๏ *Duration* - ${yts.timestamp}
-┇๏ *Views* -  ${yts.views}
-┇๏ *Author* -  ${yts.author.name}
-┇๏ *Link* -  ${yts.url}
+┇🎵 *Title* -  ${yts.title}
+┇⏳ *Duration* - ${yts.timestamp}
+┇👀 *Views* -  ${yts.views}
+┇✍️ *Author* -  ${yts.author.name}
+┇🔗 *Link* -  ${yts.url}
 ╰━━❑━⪼
 
-> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ꜱᴀʜᴀꜱ ᴛᴇᴄʜ*`;
+> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ 𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳*`;
 
-        // Send video details
-        await conn.sendMessage(from, { image: { url: data.result.thumbnail || '' }, caption: ytmsg }, { quoted: mek });
+        // Send video details with context info
+        await conn.sendMessage(from, {
+            image: { url: data.result.thumbnail || '' },
+            caption: ytmsg,
+            contextInfo: {
+                mentionedJid: [m.sender],
+                forwardingScore: 999,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '120363368552902204@newsletter',
+                    newsletterName: "𝙳 𝙸 𝙽 𝚄 | 𝚃𝙴𝙲𝙷 | 𝙸 𝙽 𝙵 𝙾ジ",
+                    serverMessageId: 143
+                }
+            }
+        }, { quoted: mek });
         
         // Send video file
-        await conn.sendMessage(from, { video: { url: data.result.download_url }, mimetype: "video/mp4" }, { quoted: mek });
+        await conn.sendMessage(from, { 
+            video: { url: data.result.download_url }, 
+            mimetype: "video/mp4" 
+        }, { quoted: mek });
         
         // Send document file (optional)
         await conn.sendMessage(from, { 
             document: { url: data.result.download_url }, 
             mimetype: "video/mp4", 
             fileName: `${data.result.title}.mp4`, 
-            caption: `> *${yts.title}*\n> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ꜱᴀʜᴀꜱ ᴛᴇᴄʜ*`
+            caption: `> *${yts.title}*\n> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ 𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳*`
         }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
         reply("An error occurred. Please try again later.");
     }
-});  
+});
        
 // play
 
 cmd({ 
-     pattern: "song", 
-     alias: ["mp3", "play"], 
-     react: "🎶", 
-     desc: "Download Youtube song",
-     category: "download", 
-     use: '.song < Yt url or Name >', 
-     filename: __filename }, 
-     async (conn, mek, m, { from, prefix, quoted, q, reply }) => 
-     
-     { try { if (!q) return await reply("Please provide a YouTube URL or song name.");
-
-const yt = await ytsearch(q);
-    if (yt.results.length < 1) return reply("No results found!");
-    
-    let yts = yt.results[0];  
-    let apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(yts.url)}`;
-    
-    let response = await fetch(apiUrl);
-    let data = await response.json();
-    
-    if (data.status !== 200 || !data.success || !data.result.downloadUrl) {
-        return reply("Failed to fetch the audio. Please try again later.");
-    }
-    
-    let ytmsg = `╭━━━〔 *SAHAS-MD* 〕━━━┈⊷
+    pattern: "song2", 
+    alias: ["mp3", "play"], 
+    react: "🎶", 
+    desc: "Download Youtube song",
+    category: "download", 
+    use: '.song < Yt url or Name >', 
+    filename: "𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳"
+}, async (conn, mek, m, { from, prefix, quoted, q, reply }) => { 
+    try { 
+        if (!q) return await reply("Please provide a YouTube URL or song name.");
+        
+        const yt = await ytsearch(q);
+        if (yt.results.length < 1) return reply("No results found!");
+        
+        let yts = yt.results[0];  
+        let apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(yts.url)}`;
+        
+        let response = await fetch(apiUrl);
+        let data = await response.json();
+        
+        if (data.status !== 200 || !data.success || !data.result.downloadUrl) {
+            return reply("Failed to fetch the audio. Please try again later.");
+        }
+        
+        let ytmsg = `╭━━━〔 *𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳* 〕━━━┈⊷
 ┃▸╭───────────
-┃▸┃๏ *MUSIC DOWNLOADER*
-┃▸└───────────···๏
+┃▸┃🎶 *MUSIC DOWNLOADER*
+┃▸└───────────···🎶
 ╰────────────────┈⊷
 ╭━━❐━⪼
-┇๏ *Tital* -  ${yts.title}
-┇๏ *Duration* - ${yts.timestamp}
-┇๏ *Views* -  ${yts.views}
-┇๏ *Author* -  ${yts.author.name} 
-┇๏ *Link* -  ${yts.url}
+┇🎵 *Title* -  ${yts.title}
+┇⏳ *Duration* - ${yts.timestamp}
+┇👀 *Views* -  ${yts.views}
+┇✍️ *Author* -  ${yts.author.name} 
+┇🔗 *Link* -  ${yts.url}
 ╰━━❑━⪼
-> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ꜱᴀʜᴀꜱ ᴛᴇᴄʜ*`;
+> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ 𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳*`;
 
+        // Send song details
+        await conn.sendMessage(from, { image: { url: data.result.image || '' }, caption: ytmsg }, { quoted: mek });
+        
+        // Send audio file as message
+        await conn.sendMessage(from, { audio: { url: data.result.downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
+        
+        // Send voice message (converted audio to voice)
+        await conn.sendMessage(from, { voice: { url: data.result.downloadUrl }, mimetype: "audio/ogg" }, { quoted: mek });
+        
+        // Send audio file as document (optional)
+        await conn.sendMessage(from, { 
+            document: { url: data.result.downloadUrl }, 
+            mimetype: "audio/mpeg", 
+            fileName: `${data.result.title}.mp3`, 
+            caption: `> *${yts.title}*\n> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ 𝙳𝙸 𝙽 𝚄 𝚆 𝙷 - 𝙼 𝙳*`
+        }, { quoted: mek });
 
-
-// Send song details
-    await conn.sendMessage(from, { image: { url: data.result.image || '' }, caption: ytmsg }, { quoted: mek });
-    
-    // Send audio file
-    await conn.sendMessage(from, { audio: { url: data.result.downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-    
-    // Send document file
-    await conn.sendMessage(from, { 
-        document: { url: data.result.downloadUrl }, 
-        mimetype: "audio/mpeg", 
-        fileName: `${data.result.title}.mp3`, 
-        caption: `> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ꜱᴀʜᴀꜱ ᴛᴇᴄʜ*`
-    }, { quoted: mek });
-
-} catch (e) {
-    console.log(e);
-    reply("An error occurred. Please try again later.");
-}
-
+    } catch (e) {
+        console.log(e);
+        reply("An error occurred. Please try again later.");
+    }
 });
 
 
+//=======TIK TOK JS =========
 cmd({
     pattern: "tiktok2",
-    alias: ["tt2", "tiktokdl2", "ttdown2", "tiktokvid2", "ttdl2"],    desc: "Download TikTok videos or audio by link.",
+    alias: ["tt2", "tiktokdl2", "ttdown2", "tiktokvid2", "ttdl2"],
+    desc: "Download TikTok videos or audio by link.",
     category: "downloader",
     react: "🎵",
     filename: __filename
@@ -172,7 +190,7 @@ cmd({
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363360651500026@newsletter',
-                    newsletterName: "👾 ＳＡＨＡＳ  |   𝚃𝙴𝙲𝙷 ジ",
+                    newsletterName: "𝙳 𝙸 𝙽 𝚄 | 𝚃𝙴𝙲𝙷 | 𝙸 𝙽 𝙵 𝙾ジ",
                     serverMessageId: 143
                 }
             }
@@ -196,18 +214,23 @@ cmd({
                     react: { text: "⬇️", key: receivedMessage.key }
                 });
 
+                // Video download
                 if (userResponse === "1") {
                     await conn.sendMessage(chatID, {
                         video: { url: videoData.video },
-                        caption: "> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ ꜱᴀʜᴀꜱ ᴛᴇᴄʜ*"
+                        caption: "> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ 𝙳 𝙸 𝙽 𝚄 | 𝚃𝙴𝙲𝙷*"
                     }, { quoted: receivedMessage });
-                } else if (userResponse === "2") {
+                }
+                // Audio download
+                else if (userResponse === "2") {
                     await conn.sendMessage(chatID, {
                         audio: { url: videoData.music },
                         mimetype: "audio/mp4",
                         ptt: false 
                     }, { quoted: receivedMessage });
-                } else {
+                }
+                // Invalid option response
+                else {
                     reply("❌ Invalid choice! Reply with *1* for video or *2* for audio.");
                 }
 
@@ -221,9 +244,7 @@ cmd({
         console.error("TikTok Downloader Error:", error);
         reply("❌ Error fetching TikTok video. Try again later.");
     }
-}); 
-
-
+});;
 // twitter-dl
 
 cmd({
