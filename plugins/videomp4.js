@@ -1,96 +1,56 @@
 const { cmd, commands } = require("../command");
-const yts = require("yt-search");
-const axios = require("axios");
+const fetch = require("node-fetch");
+const fs = require("fs");
+const axios = require("axios"); // For downloading video
 
-cmd(
-{
-    pattern: "sytmp4",
-    alias: "svideo",
+cmd({
+    pattern: "yt360",
+    alias: ["ytmp4_360"],
     react: "🎥",
-    desc: "Download YouTube Videos",
+    desc: "Download YouTube video in 360p and send",
     category: "download",
-    filename: __filename,
-},
-async (
-    robin,
-    mek,
-    m,
-    {
-        from,
-        quoted,
-        q,
-        reply,
-    }
-) => {
+    use: '.yt360 <YT URL>',
+    filename: __filename
+}, async (conn, mek, m, { from, quoted, q, reply }) => {
     try {
-        if (!q) return reply("🔍 කරුණාකර YouTube ලින්ක් එක හෝ Video නම ලබාදෙන්න!");
+        if (!q) return await reply("⚠️ Please provide a valid YouTube URL!");
 
-        // 🔎 YouTube Video සොයන්න
-        const search = await yts(q);
-        if (!search.videos.length) return reply("❌ Requested video not found!");
+        let apiUrl = `https://nethuofc.vercel.app/youtube/mp4?link=${encodeURIComponent(q)}&quality=360`;
+        let response = await fetch(apiUrl);
+        let data = await response.json();
 
-        const data = search.videos[0];
-        const videoUrl = data.url;
+        if (!data || !data.result || !data.result.url) return reply("❌ Failed to fetch video. Try another link!");
 
-        // 🎥 Video Info
-        let desc = `┏━━━━━━━━━━━━━━━┓
-┃  🎥 *DINUWH MD - MP4 Downloader* 🎬  ┃
-┗━━━━━━━━━━━━━━━┛
+        let videoUrl = data.result.url;
+        let title = data.result.title || "YouTube Video";
+        let thumbnail = data.result.thumbnail || "";
+        let duration = data.result.duration || "Unknown";
+        let channel = data.result.channel || "Unknown";
+        
+        let msg = `╭━━━〔 *🌟 DINUWH MD 🌟* 〕━━━┈⊷
+┃▸ 📽️ *YOUTUBE VIDEO 360p*
+┃▸ 🎬 *Title:* ${title}
+┃▸ ⏱️ *Duration:* ${duration}
+┃▸ 👤 *Channel:* ${channel}
+┃▸ 🔗 *Link:* ${q}
+╰━━━⪼ *💫 Downloaded by DINUWH MD*`;
 
-🎬 *Title:* ${data.title}
-⏳ *Duration:* ${data.timestamp}
-📅 *Uploaded:* ${data.ago}
-👀 *Views:* ${data.views}
-🔗 *Watch Here:* ${data.url}
+        await conn.sendMessage(from, { image: { url: thumbnail }, caption: msg }, { quoted: mek });
 
-📥 *Fetching & Downloading...*
-`;
+        // 🔽 Download video
+        let filePath = `./temp/${title.replace(/[^\w\s]/gi, '')}.mp4`; // Save with sanitized name
+        let videoStream = fs.createWriteStream(filePath);
+        let videoResponse = await axios({ url: videoUrl, responseType: "stream" });
 
-        // 📌 Send Initial Message
-        await robin.sendMessage(
-            from,
-            {
-                text: desc,
-                contextInfo: {
-                    externalAdReply: {
-                        title: "DINUWH MD - TECH CHANNEL",
-                        body: `👀 Views: ${data.views}`,
-                        thumbnail: { url: data.thumbnail },
-                        sourceUrl: "https://whatsapp.com/channel/0029Vat7xHl7NoZsrUVjN844",
-                        mediaType: 1,
-                        renderLargerThumbnail: true,
-                    },
-                },
-            },
-            { quoted: mek }
-        );
+        videoResponse.data.pipe(videoStream);
 
-        // 🎞️ Fetch MP4 Download Link (New API)
-        let apiUrl = `https://yt1s.com/api/ajaxSearch/index?vid=${encodeURIComponent(videoUrl)}`;
-        let response = await axios.get(apiUrl);
-
-        if (!response.data || !response.data.links || !response.data.links.mp4["720p"]) {
-            return reply("❌ Video download link not found!");
-        }
-
-        let downloadUrl = response.data.links.mp4["720p"].url;
-
-        // 📽️ Send Video
-        await robin.sendMessage(
-            from,
-            {
-                video: { url: downloadUrl },
-                mimetype: "video/mp4",
-                caption: `✅ *Downloaded via DINUWH MD* 🎬`,
-            },
-            { quoted: mek }
-        );
-
-        return reply("✅ *Download Complete!* Enjoy your video 🎥");
+        videoStream.on("finish", async () => {
+            await conn.sendMessage(from, { video: fs.readFileSync(filePath), mimetype: "video/mp4" }, { quoted: mek });
+            fs.unlinkSync(filePath); // Remove file after sending
+        });
 
     } catch (e) {
-        console.error(e);
-        reply(`❌ Error: ${e.message}`);
+        console.log(e);
+        reply("❌ An error occurred. Please try again later.");
     }
-}
-);
+});
