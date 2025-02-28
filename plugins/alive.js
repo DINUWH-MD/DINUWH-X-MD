@@ -50,17 +50,7 @@ cmd(
 ╰─━━━━━━❰ *ᴛʜᴀɴᴋ ʏᴏᴜ!* ❱━━━━━━─╯  
          ⛦ *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅɪɴᴜᴡʜ ᴍᴅ* ⛦`;
 
-      // Send the image first
-      await robin.sendMessage(
-        from,
-        {
-          image: { url: "https://i.ibb.co/CsQd4sTP/8060.jpg" },
-          caption: aliveText,
-        },
-        { quoted: m }
-      );
-
-      // Send the forward effect after the image
+      // Send the alive message
       await robin.sendMessage(
         from,
         {
@@ -69,8 +59,16 @@ cmd(
             forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-              newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
-              newsletterJid: "120363368552902204@newsletter",
+                newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
+                newsletterJid: "120363368552902204@newsletter",
+            },
+            externalAdReply: {
+              title: "𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 𝚃𝙴𝙲𝙷 𝙲𝙷𝙰𝙽𝙽𝙴𝙻",
+              body: "© 𝙼𝙰𝙳𝙴 𝙱𝚈 𝙳𝙸𝙽𝚄𝚆ʜ ᴍᴅ 🫣",
+              thumbnailUrl: "https://i.ibb.co/CsQd4sTP/8060.jpg",
+              sourceUrl: "https://whatsapp.com/channel/0029Vat7xHl7NoZsrUVjN844",
+              mediaType: 1,
+              renderLargerThumbnail: true,
             },
           },
         },
