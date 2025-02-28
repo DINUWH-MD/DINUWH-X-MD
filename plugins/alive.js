@@ -56,14 +56,12 @@ cmd(
         {
           text: aliveText,
           contextInfo: {
-            externalAdReply: {
-              title: "𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 𝚃𝙴𝙲𝙷 𝙲𝙷𝙽𝙽𝙻",
-              body: "© 𝙼𝙰𝙳𝙴 𝙱𝚈 𝙳𝙸𝙽𝚄𝚆ʜ ᴍᴅ 🫣",
-              thumbnailUrl: "https://i.ibb.co/CsQd4sTP/8060.jpg",
-              sourceUrl: "https://whatsapp.com/channel/0029Vat7xHl7NoZsrUVjN844",
-              mediaType: 1,
-              renderLargerThumbnail: true,
-            },
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterName: "👾 𝙳𝙸𝙽𝚄𝚆 𝙼𝙳 | 𝚃𝙴𝙲𝙷",
+                newsletterJid: "120363296605464049@newsletter",
+            }
           },
         },
         { quoted: m }
