@@ -83,39 +83,23 @@ async function connectToWA() {
     if (!mek.message) return;
     mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
 
-          //----------------AUTO STATUS VIEW-------------------------------
+    // Check if the message is a status update and auto-read
+    if (mek.key && mek.key.remoteJid === 'status@broadcast') {
+      if (config.AUTO_READ_STATUS === "true") {
+        await conn.readMessages([mek.key]);
 
-if (!mek.message) return	
-mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
-await conn.readMessages([mek.key])  
-const mnyako = await jidNormalizedUser(conn.user.id)
-await conn.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: '👾'}}, { statusJidList: [mek.key.participant, mnyako] })
-}	      
-	    if (mek.key && mek.key.remoteJid === 'status@broadcast') return
-            const m = sms(conn, mek)
-	    var smg = m
-            const type = getContentType(mek.message)
-            const content = JSON.stringify(mek.message)
-            const from = mek.key.remoteJid
-            const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.quotedMessage || [] : []
-
-
-
-const metadata = await conn.newsletterMetadata("jid", "120363314182963253@newsletter")	      
-if (metadata.viewer_metadata === null){
-await conn.newsletterFollow("120363314182963253@newsletter")
-console.log("ASITHA MD CHANNEL FOLLOW ✅")
-}	 
-
-
-const id = mek.key.server_id
-await conn.newsletterReactMessage("120363314182963253@newsletter", id, "❤️")
-
-//==================================Button================================
-	      
-const body = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text :(type == 'interactiveResponseMessage' ) ? mek.message.interactiveResponseMessage  && mek.message.interactiveResponseMessage.nativeFlowResponseMessage && JSON.parse(mek.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson) && JSON.parse(mek.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson).id :(type == 'templateButtonReplyMessage' )? mek.message.templateButtonReplyMessage && mek.message.templateButtonReplyMessage.selectedId  : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : ''
-  
+        // React with a random emoji    
+        const emojis = ['🧩', '🍉', '💜', '🌸', '🪴', '💊', '💫', '🍂', '🌟', '🎋', '😶‍🌫️', '🫀', '🧿', '👀', '🤖', '🚩', '🥰', '🗿', '💜', '💙', '🌝', '🖤', '💚'];
+        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        await conn.sendMessage(mek.key.remoteJid, {    
+          react: {    
+            text: randomEmoji,    
+            key: mek.key,    
+          }    
+        }, { statusJidList: [mek.key.participant] });
+      }
+    }
 
     const m = sms(conn, mek);
     const type = getContentType(mek.message);
