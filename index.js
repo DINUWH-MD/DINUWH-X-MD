@@ -8,19 +8,27 @@ const {
   Browsers
 } = require('@whiskeysockets/baileys');
 
-const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions');
 const fs = require('fs');
 const P = require('pino');
 const config = require('./config');
-const qrcode = require('qrcode-terminal');
-const util = require('util');
-const { sms, downloadMediaMessage } = require('./lib/msg');
 const axios = require('axios');
+const qrcode = require('qrcode-terminal');
 const { File } = require('megajs');
-const prefix = '.';
 
+const prefix = '.';
 const ownerNumber = ['94771820962'];
 
+async function getBuffer(url) {
+  try {
+    const res = await axios.get(url, { responseType: 'arraybuffer' });
+    return res.data;
+  } catch (err) {
+    console.error("Error fetching media:", err);
+    return null;
+  }
+}
+
+// **Session Download**
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
   if (!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!');
   const sessdata = config.SESSION_ID;
@@ -54,7 +62,7 @@ async function connectToWA() {
   conn.ev.on('connection.update', async (update) => {
     const { connection, lastDisconnect } = update;
     if (connection === 'close') {
-      if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
+      if (lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut) {
         connectToWA();
       }
     } else if (connection === 'open') {
@@ -68,10 +76,17 @@ async function connectToWA() {
       }
 
       let up = `DINUWH MD V2 💚 Wa-BOT connected successfully ✅\n\nPREFIX: ${prefix}`;
-      conn.sendMessage(ownerNumber + "@s.whatsapp.net", { 
-        image: { url: 'https://i.ibb.co/tC37Q7B/20241220-122443.jpg' }, 
-        caption: up 
-      });
+
+      // **Fix for Invalid Media Type**
+      const imageBuffer = await getBuffer('https://i.ibb.co/tC37Q7B/20241220-122443.jpg');
+      if (imageBuffer) {
+        await conn.sendMessage(ownerNumber + "@s.whatsapp.net", { 
+          image: imageBuffer, 
+          caption: up 
+        });
+      } else {
+        console.log("Failed to fetch image. Skipping owner notification.");
+      }
     }
   });
 
