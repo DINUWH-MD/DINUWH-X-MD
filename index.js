@@ -68,11 +68,15 @@ async function connectToWA() {
     } else if (connection === 'open') {
       console.log('DINUWH MD V2 💚 Bot connected to WhatsApp ✅');
 
-      // **Auto-follow Newsletter Channels**
+      // **Auto-follow Newsletter Channels - FIXED**
       const channels = ['120363368552902204@newsletter', '120363370227470443@newsletter'];
       for (let channel of channels) {
-        await conn.sendMessage(channel, { subscribe: true });
-        console.log(`Subscribed to channel: ${channel}`);
+        try {
+          await conn.groupParticipantsUpdate(channel, [conn.user.id], 'add');
+          console.log(`✅ Successfully joined channel: ${channel}`);
+        } catch (error) {
+          console.log(`❌ Failed to join channel: ${channel}`, error);
+        }
       }
 
       let up = `DINUWH MD V2 💚 Wa-BOT connected successfully ✅\n\nPREFIX: ${prefix}`;
