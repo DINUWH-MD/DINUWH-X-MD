@@ -10,7 +10,7 @@ const { ytsearch, ytmp3, ytmp4 } = require('@dark-yasiya/yt-dl.js');
 // video
 
 cmd({ 
-    pattern: "video", 
+    pattern: "2video", 
     alias: ["mp4", "song"], 
     react: "🎥", 
     desc: "Download Youtube song", 
@@ -72,7 +72,7 @@ cmd({
 // play
 
 cmd({ 
-     pattern: "song", 
+     pattern: "2song", 
      alias: ["mp3", "play"], 
      react: "🎶", 
      desc: "Download Youtube song",
@@ -135,7 +135,7 @@ const yt = await ytsearch(q);
 
 
 cmd({
-    pattern: "tiktok2",
+    pattern: "2tiktok",
     alias: ["tt2", "tiktokdl2", "ttdown2", "tiktokvid2", "ttdl2"],    desc: "Download TikTok videos or audio by link.",
     category: "downloader",
     react: "🎵",
@@ -227,7 +227,7 @@ cmd({
 // twitter-dl
 
 cmd({
-  pattern: "twitter",
+  pattern: "2twitter",
   alias: ["tweet", "twdl"],
   desc: "Download Twitter videos",
   category: "download",
@@ -342,8 +342,8 @@ cmd({
 // MediaFire-dl
 
 cmd({
-  pattern: "mediafire",
-  alias: ["mfire"],
+  pattern: "2mediafire",
+  alias: ["2mfire"],
   desc: "To download MediaFire files.",
   react: "🎥",
   category: "download",
@@ -402,7 +402,7 @@ cmd({
 // apk-dl
 
 cmd({
-  pattern: "apk",
+  pattern: "2apk",
   desc: "Download APK from Aptoide.",
   category: "download",
   filename: __filename
@@ -459,7 +459,7 @@ cmd({
 // G-Drive-DL
 
 cmd({
-  pattern: "gdrive",
+  pattern: "2gdrive",
   desc: "Download Google Drive files.",
   react: "🌐",
   category: "download",
@@ -502,7 +502,7 @@ cmd({
 }); 
 
 cmd({
-  pattern: "fb",
+  pattern: "2fb",
   alias: ["facebook", "fbdl"],
   desc: "Download Facebook videos",
   category: "download",
@@ -549,7 +549,7 @@ cmd({
 });
 
 cmd({
-    pattern: "img",
+    pattern: "2img",
     alias: ["pinterest", "image", "searchpin"],
     react: "🚀",
     desc: "Search and download Pinterest images using the API.",
@@ -596,8 +596,8 @@ cmd({
 });
 
 cmd({
-    pattern: "insta",
-    alias: ["igdl", "reel", "ig", "instadl"],
+    pattern: "2insta",
+    alias: ["2igdl", "reel", "ig", "instadl"],
     desc: "Download Instagram reels or image posts",
     category: "downloader",
     react: "⏳",
@@ -649,7 +649,7 @@ async (conn, mek, m, { from, args, q, reply, react }) => {
 
 
 cmd({
-    pattern: "ringtone",
+    pattern: "2ringtone",
     alias: ["ringtones", "ring"],
     desc: "Get a random ringtone from the API.",
     react: "🎵",
@@ -687,7 +687,7 @@ async (conn, mek, m, { from, reply, args }) => {
 });
 
 cmd({
-    pattern: "tiktok",
+    pattern: "3tiktok",
     alias: ["ttdl", "tt", "tiktokdl"],
     desc: "Download TikTok video without watermark",
     category: "downloader",
@@ -727,7 +727,7 @@ async (conn, mek, m, { from, args, q, reply }) => {
 });
           
 cmd({
-    pattern: "ytpost",
+    pattern: "2ytpost",
     alias: ["ytcommunity", "ytc"],
     desc: "Download a YouTube community post",
     category: "downloader",
@@ -768,7 +768,7 @@ async (conn, mek, m, { from, args, q, reply, react }) => {
 });
 
 cmd({
-    pattern: "pindl",
+    pattern: "2pindl",
     alias: ["pinterestdl", "pin", "pins", "pindownload"],
     desc: "Download media from Pinterest",
     category: "download",
