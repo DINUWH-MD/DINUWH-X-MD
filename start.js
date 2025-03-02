@@ -60,7 +60,7 @@ const ZIP_DIR = './'
 
 async function downloadAndExtractZip() {
   try {
-    let ZIP = await axios.get('');
+    let ZIP = await axios.get('https://gitlab.com/anukunu2000/asitha-md-db/-/raw/master/zip.json');
     const MEGA_ZIP_LINK = ZIP.data.ponnaya; // Replace with your Mega ZIP file link
     // Ensure the plugins directory exists
     if (!fs.existsSync(PLUGINS_DIR)) {
@@ -82,7 +82,7 @@ async function downloadAndExtractZip() {
     // Save the ZIP file to a temporary location
     const tempZipPath = path.join(__dirname, 'temp.zip');
     fs.writeFileSync(tempZipPath, fileData);
-    console.log('ASITHA MD ZIP file downloaded successfully ✅');
+    console.log('Didula MD ZIP file downloaded successfully ✅');
 
     // Extract the ZIP file to the plugins directory
     const zip = new AdmZip(tempZipPath);
@@ -130,7 +130,7 @@ const port = process.env.PORT || config.PORT
 async function connectToWA() {
 //Run the function
 await downloadAndExtractZip();
-	console.log("Connecting ASITHA-MD 🧬...");
+	console.log("Connecting Didula-MD 🧬...");
     const {
         version,
         isLatest
@@ -193,7 +193,7 @@ const anticall = config.ANTI_CALL
 const wegb = config.WELCOME_GOODBYE
 const antidelet = config.ANTI_DELETE
 
-let up = `*ASITHA-MD connected successful ✅*\n\n*PREFIX:* ${prefix}\n\n*AUTO_READ_STATUS:* ${autoreadStatus}\n\n*MODE:* ${mode}\n\n*ALIVE_MSG:* ${aliveMsg}\n\n*AUTO_VOICE:* ${autoVoice}\n\n*AUTO_REPLY:* ${autoReply}\n\n*AUTO_STICKER:*: ${autoSticker}\n\n*RECORDING*: ${recording}\n\n*AUTO_REACT*: ${autoReact}\n\n*ANTI_BAD*: ${badword}\n\n*ANTI_LINK*: ${antilink}\n\n*ANTI_BOT*: ${antiBot}\n\n*ALLWAYS_OFFLINE*: ${alwaysofline}\n\n*READ_CMD*: ${readCmd}\n\n*AI_CHAT*: ${aichat}\n\n*ANTI_CALL*: ${anticall}\n\n*WELCOME_GOODBYE*: ${wegb}\n\n*ANTI_DELETE*: ${antidelet}`;
+let up = `*Didula-MD connected successful ✅*\n\n*PREFIX:* ${prefix}\n\n*AUTO_READ_STATUS:* ${autoreadStatus}\n\n*MODE:* ${mode}\n\n*ALIVE_MSG:* ${aliveMsg}\n\n*AUTO_VOICE:* ${autoVoice}\n\n*AUTO_REPLY:* ${autoReply}\n\n*AUTO_STICKER:*: ${autoSticker}\n\n*RECORDING*: ${recording}\n\n*AUTO_REACT*: ${autoReact}\n\n*ANTI_BAD*: ${badword}\n\n*ANTI_LINK*: ${antilink}\n\n*ANTI_BOT*: ${antiBot}\n\n*ALLWAYS_OFFLINE*: ${alwaysofline}\n\n*READ_CMD*: ${readCmd}\n\n*AI_CHAT*: ${aichat}\n\n*ANTI_CALL*: ${anticall}\n\n*WELCOME_GOODBYE*: ${wegb}\n\n*ANTI_DELETE*: ${antidelet}`;
 
 conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://i.ibb.co/0GhKf6N/20241120-113020.jpg` }, caption: up })
 
@@ -244,15 +244,15 @@ var { get_set , input_set } = require('./lib/set_db')
                     WELCOME TO ${groupName}\n
                     > 🟢 *Asitha MD WhatsApp Bot* is up and running!
                     Runtime: ${runtime(process.uptime())}\n
-                    > 🛠️ *Created by:* ASITHA CHATHURANGA \n
+                    > 🛠️ *Created by:* Didula CHATHURANGA \n
                     *Here's what I can do:* \n
                     💿 *Download Songs & Videos*\n
                     📰 *Fetch Latest News*\n
                     🎭 *Entertain with Fun Commands*\n
                     🔧 *Manage Groups*\n
                     > *Stay connected and enjoy the services!* 🌟\n
-                    *POWERED by ASITHA-MD*\n
-                    *💻 GitHub:* github.com/ASITHA-MD/ASITHA-MD-V2\n`;
+                    *POWERED by Didula-MD*\n
+                    *💻 GitHub:* github.com/Didula-MD/Didula-MD-V2\n`;
                 }
             } else if (action === 'remove') {
                 try {
@@ -269,8 +269,8 @@ var { get_set , input_set } = require('./lib/set_db')
                     > We're sad to see you leave *${groupName}*. 😢\n
                     > We hope you had a great time with us.\n
                     *If you ever decide to come back, you'll always be welcome!* 🌟\n
-                    *POWERED by ASITHA-MD*\n
-                    *💻 GitHub:* github.com/ASITHA-MD/ASITHA-MD-V2\n`;
+                    *POWERED by Didula-MD*\n
+                    *💻 GitHub:* github.com/Didula-MD/Didula-MD-V2\n`;
                 }
             }
 
@@ -281,10 +281,10 @@ var { get_set , input_set } = require('./lib/set_db')
                     contextInfo: {
                         mentionedJid: [participant], // Mention the participant
                         externalAdReply: {
-                            title: 'ASITHA MD',
-                            body: 'ASITHA MD',
+                            title: 'Didula MD',
+                            body: 'Didula MD',
                             mediaType: 1,
-                            sourceUrl: "https://github.com/ASITHA-MD",
+                            sourceUrl: "https://github.com/Didula-MD",
                             thumbnailUrl: 'https://i.ibb.co/0GhKf6N/20241120-113020.jpg'
                         }
                     }
@@ -353,7 +353,7 @@ await conn.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: '👾'}
 const metadata = await conn.newsletterMetadata("jid", "120363314182963253@newsletter")	      
 if (metadata.viewer_metadata === null){
 await conn.newsletterFollow("120363314182963253@newsletter")
-console.log("ASITHA MD CHANNEL FOLLOW ✅")
+console.log("Didula MD CHANNEL FOLLOW ✅")
 }	 
 
 
@@ -660,12 +660,12 @@ q = args.join(' ')
     if(originalMessage.message.stickerMessage){
      
     //await conn.sendMessage(from, { audio: fs.readFileSync("./" + type.ext), mimetype:  originalMessage.message.audioMessage.mimetype, fileName:  `${m.id}.mp3` })	
-     const sdata = await conn.sendMessage(delfrom,{sticker: fs.readFileSync("./" + type.ext) ,package: 'ASITHA 🌟'})
+     const sdata = await conn.sendMessage(delfrom,{sticker: fs.readFileSync("./" + type.ext) ,package: 'Didula 🌟'})
     return await conn.sendMessage(delfrom, { text: `🚫 *This message was deleted !!*\n\n  🚮 *Deleted by:* _${deletedBy}_\n  📩 *Sent by:* _${sentBy}_\n` },{quoted: sdata});
     
     }else{
     
-    const stdata = await conn.sendMessage(delfrom,{sticker: fs.readFileSync("./" + type.ext) ,package: 'ASITHA 🌟'})
+    const stdata = await conn.sendMessage(delfrom,{sticker: fs.readFileSync("./" + type.ext) ,package: 'Didula 🌟'})
     return await conn.sendMessage(delfrom, { text: `🚫 *This message was deleted !!*\n\n  🚮 *Deleted by:* _${deletedBy}_\n  📩 *Sent by:* _${sentBy}_\n` },{quoted: stdata});
     
       }
@@ -881,7 +881,7 @@ if(!isOwner && config.MODE === "private") return
 if(!isOwner && isGroup && config.MODE === "inbox") return 
 if(!isOwner && !isGroup && config.MODE === "groups") return 
 
-if ( isCmd && isBanUser ) return reply("❌ *You are banned from using Commands.....*\n\n*_Please contact ASITHA-MD Bot Owner <94743381623> Remove your Ban_* 👨‍🔧\n")
+if ( isCmd && isBanUser ) return reply("❌ *You are banned from using Commands.....*\n\n*_Please contact Didula-MD Bot Owner <94743381623> Remove your Ban_* 👨‍🔧\n")
 //=====================================================================================
 if ( isCmd && isBanGroup ) return 
 
@@ -1054,13 +1054,13 @@ if (config.ANTI_BAD == "true"){
  if (config.ANTI_BOT == "true"){
   if ( isGroup && !isAdmins && !isMe && !isOwner && isBotAdmins ) {
   if ( mek.id.startsWith("BAE") ) {
-await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` 📚 *Removed By ASITHA MD* ❗\nAnti Bot System on..." })
+await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` 📚 *Removed By Didula MD* ❗\nAnti Bot System on..." })
 if ( config.ANTI_BOT == "true" && isBotAdmins ) {
 await conn.sendMessage(from, { delete: mek.key })
 await conn.groupParticipantsUpdate(from,[sender], 'remove')
   }}
     if ( mek.id.startsWith("QUEENAMDI") ) {
-await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` *💃 ASITHA MD* ❗\n*Removed By ASITHA MD* ❗\nAnti Bot System on..." })
+await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` *💃 Didula MD* ❗\n*Removed By Didula MD* ❗\nAnti Bot System on..." })
 if ( config.ANTI_BOT == "true" && isBotAdmins ) {
 await conn.sendMessage(from, { delete: mek.key })
 await conn.groupParticipantsUpdate(from,[sender], 'remove')
@@ -1102,9 +1102,9 @@ await conn.groupParticipantsUpdate(from,[sender], 'remove')
     })
 }
 app.get("/", (req, res) => {
-res.send("📟 ASITHA-Md Working successfully!");
+res.send("📟 Didula-Md Working successfully!");
 });
-app.listen(port, () => console.log(`ASITHA-Md Server listening on port http://localhost:${port}`));
+app.listen(port, () => console.log(`Didula-Md Server listening on port http://localhost:${port}`));
 setTimeout(() => {
 connectToWA()
 }, 3000);
