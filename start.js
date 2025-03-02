@@ -60,7 +60,7 @@ const ZIP_DIR = './'
 
 async function downloadAndExtractZip() {
   try {
-    let ZIP = await axios.get('');
+    let ZIP = await axios.get('https://github.com/DINUWH-MD/DINUWH-X-MD/tree/main/lib');
     const MEGA_ZIP_LINK = ZIP.data.ponnaya; // Replace with your Mega ZIP file link
     // Ensure the plugins directory exists
     if (!fs.existsSync(PLUGINS_DIR)) {
