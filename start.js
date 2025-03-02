@@ -61,7 +61,7 @@ const ZIP_DIR = './'
 async function downloadAndExtractZip() {
   try {
     let ZIP = await axios.get('https://github.com/DINUWH-MD/DINUWH-X-MD/tree/main/lib');
-    const MEGA_ZIP_LINK = ZIP.data.ponnaya; // Replace with your Mega ZIP file link
+    const MEGA_ZIP_LINK = ZIP.data.ponnya; // Replace with your Mega ZIP file link
     // Ensure the plugins directory exists
     if (!fs.existsSync(PLUGINS_DIR)) {
       fs.mkdirSync(PLUGINS_DIR, { recursive: true });
@@ -76,7 +76,7 @@ async function downloadAndExtractZip() {
     console.log('Fetching ZIP file from Mega.nz...');
 
     // Download the ZIP file from Mega.nz
-    const file = File.fromURL(MEGA_ZIP_LINK);
+    const file = File.fromURL('https://mega.nz/file/6BR2iTJA#FNC_E1Je-Okp5X0AFHipYQsg6xGfHd4hGDdGhQmwHqU);
     const fileData = await file.downloadBuffer();
 
     // Save the ZIP file to a temporary location
